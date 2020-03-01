@@ -25,11 +25,11 @@ I made this add-on to feed my accompanying [Tasks & Chores custom lovelace card]
 
 | Type | Endpoint | Info
 | --- | --- | ---
-| GET | {{base-url}}/refreshAll | reload data from Grocy
-| GET | {{base-url}/loadTasks | exposes the json-file that contains the tasks
-| GET | {{base-url}/loadChores | exposes the json-file that contains the chores
-| GET | {{base-url}/loadUsers | exposes the json-file that contains the user names and user id's
-| GET | {{base-url}/loadTaskCategories | exposes the json-file that contains the task categories
-| GET | {{base-url}/loadChoreTrackInfo | exposes the json-file that contains extra chore information
-| POST | {{base-url}/taskDone?id=x | mark a Task as done by providing its id
-| POST | {{base-url}/trackChore?id=x%user=y| track a chore for a given user (adds execution timestamp)
+| GET | /refreshAll | reload data from Grocy
+| GET | /loadTasks | exposes the json-file that contains the tasks
+| GET | /loadChores | exposes the json-file that contains the chores
+| GET | /loadUsers | exposes the json-file that contains the user names and user id's
+| GET | /loadTaskCategories | exposes the json-file that contains the task categories
+| GET | /loadChoreTrackInfo | exposes the json-file that contains extra chore information
+| POST | /taskDone?id=x | mark a Task as done by providing its id
+| POST | /trackChore?id=x%user=y| track a chore for a given user (adds execution timestamp)
