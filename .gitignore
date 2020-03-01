@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+hassio-addon-example/app.js
+hassio-addon-example/config.json
+hassio-addon-example/Dockerfile
+hassio-addon-example/LICENSE
+hassio-addon-example/package.json
+hassio-addon-example/README.md
+hassio-addon-example/run.sh
+hassio-addon-grocy-api-wrapper/json/chores.json
+hassio-addon-grocy-api-wrapper/json/choreTrackInfo.json
+hassio-addon-grocy-api-wrapper/json/taskCategories.json
+hassio-addon-grocy-api-wrapper/json/tasks.json
+hassio-addon-grocy-api-wrapper/json/users.json

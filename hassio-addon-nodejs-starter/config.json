@@ -1,0 +1,14 @@
+{
+    "name": "Starter project for Node.js based Hass.io addons",
+    "version": "0.003",
+    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+    "slug": "nodejs_starter_hassio",
+    "description": "Starter project for Node.js based Hass.io addons",
+    "startup": "before",
+    "boot": "auto",
+    "map": [
+      "share:rw"
+    ],
+    "options": {},
+    "schema": {}
+  }

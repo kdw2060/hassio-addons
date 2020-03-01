@@ -1,0 +1,14 @@
+{
+  "name": "nodejs_starter_hassio",
+  "version": "0.0.1",
+  "description": "Starter project for Node.js based Hass.io addons",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kdw2060",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
