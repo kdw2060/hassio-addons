@@ -23,6 +23,7 @@ The add-on is up and running when the log shows that the json files have been wr
 
 I made this add-on to feed my accompanying [Tasks & Chores custom lovelace card](https://github.com/kdw2060/hassio-custom-cards/tree/master/grocy-chores-tasks). If you wish to make your own card or otherwhise consume the wrapper api, this are the endpoints:
 
+| Type | Endpoint | Info
 | GET | {{base-url}}/refreshAll | reload data from Grocy
 | GET | {{base-url}/loadTasks | exposes the json-file that contains the tasks
 | GET | {{base-url}/loadChores | exposes the json-file that contains the chores
