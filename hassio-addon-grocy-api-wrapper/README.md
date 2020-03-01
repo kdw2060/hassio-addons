@@ -11,7 +11,7 @@ Currently **only the Tasks and Chores** you have entered in Grocy are exposed th
 Consult the Grocy-documentation to find out how to generate a api key.
 2. Copy all project files to a folder in the *Addons* folder of Home Assistant
 3. Navigate to Supervisor > Add-on store and click the refresh icon
-4. The add-on shoud show up under 'Local add-ons', select and install
+4. The add-on should show up under 'Local add-ons', select and install
 5. Set the configuration:
 ```yaml
 grocyApiUrl: *the ip-adress + port of your Grocy instance* e.g. 'http://192.168.1.5:9192' 
