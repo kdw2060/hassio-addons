@@ -13,7 +13,7 @@ Consult the Grocy-documentation to find out how to generate a api key.
 3. Navigate to Supervisor > Add-on store and click the refresh icon
 4. The add-on shoud show up under 'Local add-ons', select and install
 5. Set the configuration:
-```
+```yaml
 grocyApiUrl: *the ip-adress + port of your Grocy instance* e.g. 'http://192.168.1.5:9192' 
 apiKey: *the api key you got from Grocy*
 ```
@@ -23,11 +23,11 @@ The add-on is up and running when the log shows that the json files have been wr
 
 I made this add-on to feed my accompanying [Tasks & Chores custom lovelace card](https://github.com/kdw2060/hassio-custom-cards/tree/master/grocy-chores-tasks). If you wish to make your own card or otherwhise consume the wrapper api, this are the endpoints:
 
-| GET | /refreshAll | reload data from Grocy
-| GET | /loadTasks | exposes the json-file that contains the tasks
-| GET | /loadChores | exposes the json-file that contains the chores
-| GET | /loadUsers | exposes the json-file that contains the user names and user id's
-| GET | /loadTaskCategories | exposes the json-file that contains the task categories
-| GET | /loadChoreTrackInfo | exposes the json-file that contains extra chore information
-| POST | /taskDone?id=x | mark a Task as done by providing its id
-| POST | /trackChore?id=x%user=y| track a chore for a given user (adds execution timestamp)
+| GET | {{base-url}}/refreshAll | reload data from Grocy
+| GET | {{base-url}/loadTasks | exposes the json-file that contains the tasks
+| GET | {{base-url}/loadChores | exposes the json-file that contains the chores
+| GET | {{base-url}/loadUsers | exposes the json-file that contains the user names and user id's
+| GET | {{base-url}/loadTaskCategories | exposes the json-file that contains the task categories
+| GET | {{base-url}/loadChoreTrackInfo | exposes the json-file that contains extra chore information
+| POST | {{base-url}/taskDone?id=x | mark a Task as done by providing its id
+| POST | {{base-url}/trackChore?id=x%user=y| track a chore for a given user (adds execution timestamp)
