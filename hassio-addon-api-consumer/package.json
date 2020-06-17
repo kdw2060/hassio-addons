@@ -1,0 +1,17 @@
+{
+  "name": "api_consumer",
+  "version": "1.0.0",
+  "description": "Create and update HA sensors in javascript with the HA api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kdw2060",
+  "url": "https://github.com/kdw2060/hassio-addons/",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "moment": "^2.26.0",
+    "node-cron": "^2.0.3"
+  }
+}

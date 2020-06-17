@@ -114,3 +114,5 @@ hassio-addon-grocy-api-wrapper/json/choreTrackInfo.json
 hassio-addon-grocy-api-wrapper/json/taskCategories.json
 hassio-addon-grocy-api-wrapper/json/tasks.json
 hassio-addon-grocy-api-wrapper/json/users.json
+hassio-addon-api-consumer/package-lock.json
+hassio-addon-api-consumer/caldavConsumer.js

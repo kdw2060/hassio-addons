@@ -1,11 +1,18 @@
-# Grocy API wrapper
+# DEPRECATED
+
+I've moved away from building custom add-ons and custom cards for a certain service.
+Have a look at sdfsdfsdf instead. It has a sample consumer for the Grocy Tasks.
+
+
+
+## Grocy API wrapper
 
 Because the Grocy API is pretty slow (at least when running the Grocy Hass.io addon on a Raspberry Pi), this wrapper caches the api data in json files.
 
 Currently **only the Tasks and Chores** you have entered in Grocy are exposed through this api wrapper as that is the only data I need for my custom card that displays this info.
 
 
-## Installation and configuration
+### Installation and configuration
 
 1. First make sure you have installed Grocy. I use the [official add-on](https://github.com/hassio-addons/addon-grocy), but a standalone installation should work too.
 Consult the Grocy-documentation to find out how to generate a api key.
