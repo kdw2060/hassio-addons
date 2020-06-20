@@ -27,7 +27,7 @@ On the Configuration tab just enter the filenames (minus the .js) of the consume
 
 Upon saving and restarting the add-on will load the files and your new sensor will be running in the background, hooray.
 
-![afbeelding](https://github.com/kdw2060/hassio-addons/raw/master/hassio-addon-api-consumer/config-api-consumericon.png)
+![afbeelding](https://github.com/kdw2060/hassio-addons/raw/master/hassio-addon-api-consumer/config-api-consumer.png)
 
 
 ## Example consumers and making your own consumer
