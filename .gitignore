@@ -116,3 +116,5 @@ hassio-addon-grocy-api-wrapper/json/tasks.json
 hassio-addon-grocy-api-wrapper/json/users.json
 hassio-addon-api-consumer/package-lock.json
 hassio-addon-api-consumer/caldavConsumer.js
+hassio-addon-api-consumer/consumers/caldavConsumer.js
+hassio-addon-api-consumer/consumers/testConsumer.js

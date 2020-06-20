@@ -1,11 +1,12 @@
 # DEPRECATED
 
 I've moved away from building custom add-ons and custom cards for a certain service.
-Have a look at sdfsdfsdf instead. It has a sample consumer for the Grocy Tasks.
+Have a look at my [Api Consumer](https://github.com/kdw2060/hassio-addons/tree/master/hassio-addon-api-consumer) add-on instead. It has a sample consumer for the Grocy Tasks.
 
 
+---
 
-## Grocy API wrapper
+### Grocy API wrapper
 
 Because the Grocy API is pretty slow (at least when running the Grocy Hass.io addon on a Raspberry Pi), this wrapper caches the api data in json files.
 

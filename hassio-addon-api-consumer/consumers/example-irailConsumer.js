@@ -15,12 +15,16 @@ const baseUrl = "https://api.irail.be";
 //GETTERS AND SETTERS//
 ///////////////////////
 
+// This consumer was built to replace my earlier custom card (https://github.com/kdw2060/hassio-custom-cards/tree/master/nmbs-routeboard)
+
+
 function getTrains() {
   // Define sensor object
   let sensorName = "treinen_naar_brussel";
   let sensorData;
 
   // 1. Get the data from the api we're consuming
+  // Docs for this api: https://docs.irail.be/
   axios.get(baseUrl + '/connections/?from=Antwerpen-Berchem&to=Brussel-Centraal&format=json&lang=nl&results=5')
   .then((response) => {
     sensorData = response.data;
@@ -63,6 +67,7 @@ function getTrains() {
 //CRON//
 ////////
 
+// Update sensor every 2 minutes
 cron.schedule('*/2 * * * *', () => {
   getTrains();
   console.log("getTrains cronjob executed at: " + new Date() );

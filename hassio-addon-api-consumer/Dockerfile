@@ -7,9 +7,8 @@ RUN apk add --no-cache nodejs-npm
 WORKDIR /usr/src/app
 # Copy data for add-on
 COPY package.json .
-COPY . .
+COPY consumers/*Consumer.js /usr/src/app
 COPY run.sh /usr/src/app
-#COPY json /json/
 RUN chmod a+x /usr/src/app/run.sh
 
 CMD [ "/usr/src/app/run.sh" ]

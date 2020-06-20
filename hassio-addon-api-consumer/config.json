@@ -1,18 +1,16 @@
 {
     "name": "API Consumer",
-    "version": "0.058",
+    "version": "0.099",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "api_consumer",
     "description": "Create and update sensors through the HA api",
-    "url": "https://github.com/kdw2060/hassio-addons",
+    "url": "https://github.com/kdw2060/hassio-addons/tree/master/hassio-addon-api-consumer",
     "startup": "initialize",
     "boot": "auto",
     "hassio_api": true,
     "homeassistant_api": true,
     "hassio_role": "default",
-    "map": [
-      "share:rw"
-    ],
-    "options": {"consumerList": ["irailConsumer", "grocyConsumer"]},
+    "map": ["share:rw"],
+    "options": {"consumerList": ["example-irailConsumer"]},
     "schema": false
   }

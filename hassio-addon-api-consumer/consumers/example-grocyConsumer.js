@@ -22,7 +22,8 @@ const reqOptions = { headers: {'GROCY-API-KEY': '*redacted*'} };
 //GETTERS AND SETTERS//
 ///////////////////////
 
-// One or more functions that fetch the data and post it to Home Assistant sensor(s)
+// One or more functions that fetch the data and post it to Home Assistant sensor(s) 
+//This particular consumer was built because the existing Grocy component you can get through Hacs doesn't include a sensor for the Tasks entered in Grocy. For now I've chosen to just map the Grocy api-calls one on one to three sensors. You could however also choose to combine the data first and then send only one data object to HA.
 
 function getTasks() {
   // Define sensor object
@@ -34,9 +35,11 @@ function getTasks() {
   axios.get(baseUrl + '/api/tasks', reqOptions)
   .then((response) => {
     sensorData = response.data;
+    //console.log(sensorData);
 
     // 2. Transform the data if needed
     // Because Axios does such a swell job at parsing json this will likely not be necessary. If the source api gives you too much info or a non-json response however, you'll probably need to do some magic here.
+
 
       // 3. Then post the data to Home Assistant
       // Because our response exceeds the 255 character limit for the sensor state, we set it as a sensor attribute.
@@ -47,7 +50,7 @@ function getTasks() {
         },
         postReqOptions)
       .then((response) => {
-        //console.log('posted Grocy Tasks to Hass');
+        console.log('posted Grocy Tasks to Hass');
       }, (error) => {
         console.log(error);
       });
