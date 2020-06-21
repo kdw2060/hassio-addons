@@ -1,8 +1,8 @@
 //////////
 //CONFIG//
 //////////
-//const axios = require("axios");
-//const cron = require('node-cron');
+const axios = require("/usr/src/app/node_modules/axios");
+const cron = require('/usr/src/app/node_modules/node-cron');
 
 // HOME ASSISTANT API OPTIONS
 const postReqOptions = {headers: {'Authorization': 'Bearer ' + process.env.SUPERVISOR_TOKEN}};
