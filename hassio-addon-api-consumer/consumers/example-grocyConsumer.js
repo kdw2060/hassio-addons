@@ -2,9 +2,9 @@
 //CONFIG//
 //////////
 // The Node.js libraries we'll be using
-// If you're new to creating http requests, check out this tutorial: https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
-const axios = require("axios");
-const cron = require('node-cron');
+// Note the absolute path here to the file system of the Docker instance this add-on runs in because npm install is executed there but this consumer file is located in /share/consumers. 
+const axios = require('/usr/src/app/node_modules/axios');
+const cron = require('/usr/src/app/node_modules/node-cron');
 
 // HOME ASSISTANT API OPTIONS
 // This gets the supervisor token and configures the header for the posts to the Home Assistant api that we will be doing. No need to change anything here.
@@ -32,6 +32,7 @@ function getTasks() {
   let sensorData;
 
   // 1. Get the data from the api we're consuming
+  // If you're new to creating http requests, check out this tutorial: https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
   axios.get(baseUrl + '/api/tasks', reqOptions)
   .then((response) => {
     sensorData = response.data;

@@ -1,7 +1,7 @@
 //////////
 //CONFIG//
 //////////
-const axios = require("/usr/src/app/node_modules/axios");
+const axios = require('/usr/src/app/node_modules/axios');
 const cron = require('/usr/src/app/node_modules/node-cron');
 
 // HOME ASSISTANT API OPTIONS
