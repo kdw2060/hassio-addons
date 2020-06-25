@@ -120,3 +120,5 @@ hassio-addon-api-consumer/consumers/caldavConsumer.js
 hassio-addon-api-consumer/consumers/testConsumer.js
 hassio-addon-api-consumer/consumers/grocyConsumer.js
 hassio-addon-api-consumer/consumers/irailConsumer.js
+hassio-addon-api-consumer/consumers/GMXcaldavConsumer.js
+hassio-addon-api-consumer/consumers/old_grocyConsumer.js

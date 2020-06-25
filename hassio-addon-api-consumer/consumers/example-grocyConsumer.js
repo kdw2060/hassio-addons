@@ -43,10 +43,10 @@ function getTasks() {
 
 
       // 3. Then post the data to Home Assistant
-      // Because our response exceeds the 255 character limit for the sensor state, we set it as a sensor attribute.
+      // Because our response exceeds the 255 character limit for the sensor state, we set it as a sensor attribute. For the state i set the length of the data array, which will equal the number of tasks.
       // Each use case will have its own requirements, define the post body object as you see fit.
       axios.post('http://supervisor/core/api/states/sensor.' + sensorName, 
-        { state: 'none',
+        { state: sensorData.length,
         attributes: {data: sensorData}
         },
         postReqOptions)

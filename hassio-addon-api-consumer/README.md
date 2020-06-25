@@ -31,14 +31,16 @@ Upon saving and restarting the add-on will load the files and your new sensor wi
 
 
 ## Example consumers and making your own consumer
-Most of the actual configuration is consumer-specific and done inside the respective `consumerName.js` files. Have a look at the irail and Grocy consumers that are included. If you're already familiar with Node.js and http requests it should speak for itself.
+Most of the actual configuration is consumer-specific and done inside the respective `consumerName.js` files. Have a look at the irail and grocy consumers that are included. If you're already familiar with Node.js and http requests it should speak for itself.
 
 These Node packages are automatically installed with this add-on: 
 - Axios (to handle the http requests)
+- Cheerio (handy if the data you're consuming is html/txt)
+- ics-to-json (because I have a private consumer that processes vcal data)
 - Node-cron (to schedule the sensor updates)
-- Moment (because handling dates is going to be very likely, even though the included example consumers don't use it)
+- Moment (handy for processing date-related data)
 
-If you need extra libraries/packages, you'll either have to fork this add-on or install it locally, so you can alter the dependencies in `package.json`. Or you could copy those over to the /share/consumers folder too and refer to that path when you require them in your `consumerName.js` file.
+If you need extra libraries/packages or you want to get rid of some of the above packages, you'll either have to fork this add-on or install it locally, so you can alter the dependencies in `package.json`. Or you could copy your extra libraries over to the /share/consumers folder too and refer to that path when you require them in your `consumerName.js` file.
 
 
 I've written pretty extensive comments inside the included `example-grocyConsumer.js` file that should hopefully help people with basic javascript skills and the willingness to learn more themselves to get going and start experimenting too. Just copy one of the demo consumer files and alter as needed. If you want to learn more about Node.js, these are some good tutorials:
@@ -47,6 +49,15 @@ https://flaviocopes.com/tags/node/
 
 I suggest you test your consumer locally on your pc before uploading it, just put in a lot of `console.log` statements that display the data you're working with and run the file with `node consumerName.js` in your terminal.
 
+
+### Using the data in your UI
+With all the data assigned to sensors you can access it with any Lovelace card and [templating](https://www.home-assistant.io/docs/configuration/templating/).
+
+For instance for the irail example data:
+
+```
+{{state_attr("sensor.treinen_naar_brussel", "data")[0].direction}}
+```
 
 ---
 _logo attribution: [Noun Project 2086401 by Ahmad ID]( https://thenounproject.com/term/api/2086401/)_

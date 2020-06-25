@@ -48,7 +48,7 @@ function getTrains() {
     }
       // 3. Then post the data to Home Assitant
       axios.post('http://supervisor/core/api/states/sensor.' + sensorName, 
-        { state: 'none',
+        { state: simplifiedSensorData.length,
         attributes: {data: simplifiedSensorData}
         },
         postReqOptions)
