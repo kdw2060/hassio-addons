@@ -67,8 +67,8 @@ function getTrains() {
 //CRON//
 ////////
 
-// Update sensor every 2 minutes
-cron.schedule('*/2 * * * *', () => {
+// Update sensor every 2 minutes between 6 and 10 am
+cron.schedule('*/2 6-10 * * *', () => {
   getTrains();
   console.log("getTrains cronjob executed at: " + new Date() );
 });

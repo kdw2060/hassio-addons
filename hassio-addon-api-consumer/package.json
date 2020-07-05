@@ -8,6 +8,7 @@
   },
   "author": "kdw2060",
   "url": "https://github.com/kdw2060/hassio-addons/tree/master/hassio-addon-api-consumer",
+  "repository": "https://github.com/kdw2060/hassio-addons/tree/master/hassio-addon-api-consumer",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
