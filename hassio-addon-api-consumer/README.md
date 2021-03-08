@@ -21,7 +21,7 @@ Essentialy the pattern used here is another way to write a custom component. I m
 
 
 ## Configuration
-The add-on will create a _consumers_ folder inside the /share folder of your HA instance and my example consumers will be copied there. **When you create consumers yourself, you should also place them in this folder.**
+The add-on will create a _consumers_ folder inside the /share folder of your HA instance and my example consumers will be copied there. **When you create consumers yourself, you should also place them in this folder and their filename should include 'Consumer'.**
 
 On the Configuration tab just enter the filenames (minus the .js) of the consumerJS files you've written and uploaded to the /share/consumers folder. One of my example consumers is set as the standard config.
 
