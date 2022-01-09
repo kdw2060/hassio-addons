@@ -13,7 +13,7 @@ Essentialy the pattern used here is another way to write a custom component. I m
 
 ## Installation
 
-1. In Home Assistant go to Supervisor > Add-on store
+1. In Home Assistant go to Settings > Add-ons / Supervisor > Add-on store
 2. Click the 3-dot menu icon > choose _Repositories_ > paste _https://github.com/kdw2060/hassio-addons_ in the pop up then click ADD.
 3. Now choose the reload option in the 3-dot menu
 4. The repository and the add-ons it contains should now apppear in the store.
@@ -35,8 +35,7 @@ Most of the actual configuration is consumer-specific and done inside the respec
 
 These Node packages are automatically installed with this add-on: 
 - Axios (to handle the http requests)
-- Cheerio (handy if the data you're consuming is html/txt)
-- ics-to-json (because I have a private consumer that processes vcal data)
+- Cheerio (handy if the data you're consuming is html or xml)
 - Node-cron (to schedule the sensor updates)
 - Moment (handy for processing date-related data)
 

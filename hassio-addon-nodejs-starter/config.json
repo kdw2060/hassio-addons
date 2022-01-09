@@ -4,7 +4,7 @@
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "nodejs_starter_hassio",
     "description": "Starter project for Node.js based Hass.io addons",
-    "startup": "before",
+    "startup": "application",
     "boot": "auto",
     "map": [
       "share:rw"
