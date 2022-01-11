@@ -1,6 +1,6 @@
 {
     "name": "Hass Calendar Addon",
-    "version": "0.102",
+    "version": "0.104",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "hass_calendar_addon",
     "description": "Addon to consume caldav and google calendars and make future calendar events available as sensordata in Home Assistant.",

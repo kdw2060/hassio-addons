@@ -11,7 +11,9 @@ RUN \
 # Copy data for add-on
 COPY package.json .
 COPY index.js .
-COPY ics-to-json-extended data/ics-to-json-extended
+
+COPY ics-to-json ./ics-to-json/
+
 COPY run.sh /
 
 RUN chmod a+x /run.sh

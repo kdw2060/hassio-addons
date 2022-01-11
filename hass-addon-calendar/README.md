@@ -2,7 +2,7 @@
 
 This add-on can be used to load caldav and google calendar data and makes future calendar events available as sensordata in Home Assistant.
 
-The data is available as a sensor (one per calendar), where the sensor state equals the number of future events in your calendar and the data attribute of the sensor contains the events information.
+There's one sensor per calendar, the sensor state equals the number of future events in your calendar and the data attribute of the sensor contains the events information.
 
 Example:
 
@@ -46,6 +46,10 @@ Another common use would off course be to use the data in automation scripts.
 As you can see the start- and end-dates of the events are also available in split up form to make it easier to work with the data.
 
 For installation and configuration information see the DOCS.md file (on github) or click the docs tab (when reading this in Home Assistant.)
+
+### To Do's
+- [ ] Caldav: better support for recurring events (now only yearly recurring will be correct)
+- [ ] Better detection of changed configuration
 
 ---
 

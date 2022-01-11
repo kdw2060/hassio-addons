@@ -4,7 +4,7 @@ const fs =  require("fs");
 const axios = require("axios");
 const cron = require("node-cron");
 const cheerio = require("cheerio");
-const icsToJson = require("/data/ics-to-json-extended").default;
+const icsToJson = require("./ics-to-json").default;
 const {google} = require("googleapis");
 const moment = require("moment");
 const locale = options.calendarList[0].locale;
@@ -18,7 +18,6 @@ const postReqOptions = {headers: {'Authorization': 'Bearer ' + process.env.SUPER
 const numberOfCalendars = options.calendarList.length;
 let allFutureEvents = {};
 
-
 function getEvents() {
   for (let i = 0; i < numberOfCalendars; i++) {
     let sensorName = options.calendarList[i].calName;
@@ -29,7 +28,7 @@ function getEvents() {
     let oneYearFromNow = new Date();
     oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
     let endDTSTRING = (oneYearFromNow.getFullYear() + ("0" + (oneYearFromNow.getMonth()+1)).slice(-2) + ("0" + oneYearFromNow.getDate()).slice(-2) + "T" + ("0" + oneYearFromNow.getHours()).slice(-2) + ("0" + oneYearFromNow.getMinutes()).slice(-2) + "00Z");
-    
+
     var caldavReportBody = `<c:calendar-query xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav">\n\t<d:prop>\n\t\t<d:getetag />\n\t</d:prop>\n\t<c:filter>\n\t\t<c:comp-filter name="VCALENDAR">\n\t\t\t<c:comp-filter name="VEVENT">\n\t\t\t\t<c:time-range  start="${startDTSTRING}" end="${endDTSTRING}"/>\n\t\t\t</c:comp-filter>\n\t\t</c:comp-filter>\n\t</c:filter>\n</c:calendar-query>`;
   
     if (options.calendarList[i].calType === 'caldav') {
@@ -60,21 +59,31 @@ function getEvents() {
           axios.get(caldavUrl + eventUris[i], reqOptions2)
           .then((response) => {
             let calendarItem = icsToJson(response.data);
-            // console.log(calendarItem[0]);
             if (calendarItem[0] !== undefined) {  
               if (calendarItem[0].endDate == undefined) {
-                calendarItem[0].endDate = calendarItem[0].startDate;}
-                calendarItem[0].startDate = moment(calendarItem[0].startDate);
-                calendarItem[0].year = calendarItem[0].startDate.format("YY");
-                calendarItem[0].start_month = calendarItem[0].startDate.format("MMM");
-                calendarItem[0].start_day = parseInt(calendarItem[0].startDate.format("DD"));
-                calendarItem[0].start_time = calendarItem[0].startDate.format("HH:mm");
-                calendarItem[0].endDate = moment(calendarItem[0].endDate);
-                calendarItem[0].end_month = calendarItem[0].endDate.format("MMM");
-                calendarItem[0].end_day = parseInt(calendarItem[0].endDate.format("DD"));
-                calendarItem[0].end_time = calendarItem[0].endDate.format("HH:mm");
-                if (calendarItem[0].location) {calendarItem[0].location = calendarItem[0].location.replace(/\\/g, '');}
-                allFutureEvents[`${sensorName}`].push(calendarItem[0]);
+                // for recurring events - so far only solution for yearly recurring
+                calendarItem[0].startDate = moment(calendarItem[0].startDate).add(1, 'years');
+                calendarItem[0].endDate = calendarItem[0].startDate;
+              }
+              calendarItem[0].startDate = moment(calendarItem[0].startDate);
+              calendarItem[0].year = calendarItem[0].startDate.format("YY");
+              calendarItem[0].start_month = calendarItem[0].startDate.format("MMM");
+              calendarItem[0].start_day = parseInt(calendarItem[0].startDate.format("DD"));
+              calendarItem[0].start_time = calendarItem[0].startDate.format("HH:mm");
+              calendarItem[0].endDate = moment(calendarItem[0].endDate);
+              calendarItem[0].end_month = calendarItem[0].endDate.format("MMM");
+              calendarItem[0].end_day = parseInt(calendarItem[0].endDate.format("DD"));
+              calendarItem[0].end_time = calendarItem[0].endDate.format("HH:mm");
+              if (calendarItem[0].location) {calendarItem[0].location = calendarItem[0].location.replace(/\\/g, '');}
+              allFutureEvents[`${sensorName}`].push(calendarItem[0]);
+
+              if (i = (eventUris.length - 1)){
+                  allFutureEvents[`${sensorName}`].sort(function(a,b) {
+                    a = new Date(a.startDate);
+                    b = new Date(b.startDate);
+                    return a>b ? 1 : a<b ? -1 : 0;
+                  });
+                }
             }
           },(error) => {
             console.log('error with: ' + error.config.url + error.response);
@@ -108,7 +117,6 @@ function getEvents() {
       }, function(err, res) {
         if (err) {
           console.log('There was an error loading the gcal data: ' + err);
-          // console.log(res);
           return;
         }
         if (res.status === 200) {
@@ -139,20 +147,8 @@ function getEvents() {
 
 
 function postEvents(sensorName){
-  //console.log ('postEvents function run for: ' + sensorName);
   let events = JSON.parse(fs.readFileSync('/data/allFutureEvents.json', 'utf-8'));
   let numberOfEvents = events[`${sensorName}`].length;
-  // console.log("before sorting: " + events);
-  
-  if (options.sensorName.calType === 'caldav') {
-    events[`${sensorName}`].sort(function(a,b) {
-      a = new Date(a.startDate);
-      b = new Date(b.startDate);
-      return a>b ? 1 : a<b ? -1 : 0;
-    })
-    fs.writeFileSync('sortedCaldavEvents.json', JSON.stringify(events[`${sensorName}`]));
-  }
-  //console.log("after sort: " + events);
   
   axios.post('http://supervisor/core/api/states/sensor.' + sensorName, 
     { state: numberOfEvents,
@@ -166,7 +162,6 @@ function postEvents(sensorName){
 }
 
 function postEventsAllCalendars() {
-  // console.log(numberOfCalendars);
   for (let k = 0; k < numberOfCalendars; k++) { 
     postEvents(options.calendarList[k].calName);
   }
@@ -177,24 +172,24 @@ function postEventsAllCalendars() {
 //CRON//
 ////////
 
-//Just for testing
-// getEvents();
-//
-
-
 //Upon restart, if events are stored, load and push to sensor(s)
 if ( fs.existsSync('/data/allFutureEvents.json') ) {
-  postEventsAllCalendars();
-  console.log("Previously stored events posted to sensor(s) at: " + new Date() );
+  /// dirty quick check in case add-on configuration has changed since last restart - needs more work
+  let events = JSON.parse(fs.readFileSync('/data/allFutureEvents.json', 'utf-8'));
+  let firstCal = options.calendarList[0].calName;
+  if (events[`${firstCal}`] !== undefined ) {
+    postEventsAllCalendars();
+    console.log("Previously stored events posted to sensor(s) at: " + new Date() );
+  }
 }
 
 // Getting and posting events every 30 minutes
-cron.schedule('4,35 * * * *', () => {
+cron.schedule('4,34 * * * *', () => {
   getEvents();
   console.log("Calendar(s) queried at: " + new Date() );
 });
 
-cron.schedule('6,37 * * * *', () => {
+cron.schedule('6,36 * * * *', () => {
   fs.writeFileSync('/data/allFutureEvents.json', JSON.stringify(allFutureEvents), err => { if(err){console.log(err); return}});  
   postEventsAllCalendars();
   console.log("Events posted to sensor(s) at: " + new Date() );
