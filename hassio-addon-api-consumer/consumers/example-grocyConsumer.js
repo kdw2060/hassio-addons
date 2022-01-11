@@ -3,8 +3,8 @@
 //////////
 // The Node.js libraries we'll be using
 // Note the absolute path here to the file system of the Docker instance this add-on runs in because npm install is executed there but this consumer file is located in /share/consumers. 
-const axios = require('/usr/src/app/node_modules/axios');
-const cron = require('/usr/src/app/node_modules/node-cron');
+const axios = require('/node_modules/axios');
+const cron = require('/node_modules/node-cron');
 
 // HOME ASSISTANT API OPTIONS
 // This gets the supervisor token and configures the header for the posts to the Home Assistant api that we will be doing. No need to change anything here.
