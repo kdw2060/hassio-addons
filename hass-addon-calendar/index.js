@@ -143,15 +143,19 @@ function getEvents() {
               calendarItem.end_time = calendarItem.endDate.format("HH:mm");
             }
             if (element.start.date) {
-              calendarItem.year = element.start.date.slice(0,4);
-              calendarItem.start_month = element.start.date.slice(5,7);
-              calendarItem.start_day = element.start.date.slice(8);
+              calendarItem.startDate = moment(element.start.date);
+              calendarItem.year = calendarItem.startDate.format("YY");
+              calendarItem.start_month = calendarItem.startDate.format("MMM");
+              calendarItem.start_day = parseInt(calendarItem.startDate.format("DD"));
+              calendarItem.start_time = null;
               calendarItem.whole_day = true;
             }
             if (element.end.date) {
-              calendarItem.year = element.end.date.slice(0,4);
-              calendarItem.end_month = element.end.date.slice(5,7);
-              calendarItem.end_day = element.end.date.slice(8);
+              calendarItem.endDate = moment(element.end.date);
+              calendarItem.end_month = calendarItem.endDate.format("MMM");
+              calendarItem.end_day = parseInt(calendarItem.endDate.format("DD")
+              );
+              calendarItem.end_time = null;
             }
             if (element.recurringEventId) {calendarItem.recurring = true;}
           
