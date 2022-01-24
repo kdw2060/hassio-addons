@@ -29,7 +29,7 @@ calendarList:
 | :--- | :--- | :-------- | :---- |
 | calName | string | **always** | any name you prefer, this will also become the sensor-name |
 | calType | string | **always** | set to either `caldav` or `google` |
-| locale | string | **always** | a locale to get date/time presentation and translation right. Check out the [Locale Support section near the bottom of the MomentJS homepage](https://momentjs.com/). Pick one and use the locate string (the 2 or 4 letter-codes) you can see in the demo frame. |
+| locale | string | **always** | a locale to get date/time presentation and translation right. Check out the [Locale Support section near the bottom of the MomentJS homepage](https://momentjs.com/). Pick one and use the locale string (the 2 or 4 letter-codes) you can see in the demo frame. |
 | username | string | **if caldav** | the username you login with for your caldav-provider |
 | password | string | **if caldav** | the password you login with for your caldav-provider |
 | caldavUrl | string | **if caldav** | the https address for your caldav-provider. E.g. 'https://caldav.gmx.net/begenda/dav/your-email-adress/calendar/' |

@@ -10,18 +10,18 @@ Example:
 entity: sensor.my-calendar
 state: 2
 data:
-  - startDate: '2022-01-08T12:00:00.000Z'
-    endDate: '2022-01-08T13:30:00.000Z'
+  - startDate: '2022-01-08T20:00:00.000Z'
+    endDate: '2022-01-08T23:30:00.000Z'
     summary: Event example one
     location: Some street, Some place
     label: 🎉 party-time
     year: '22'
     start_month: jan
     start_day: 8
-    start_time: '13:00'
+    start_time: '21:00'
     end_month: jan
-    end_day: 8
-    end_time: '14:30'
+    end_day: 9
+    end_time: '00:30'
   - startDate: '2022-01-14T17:30:00.000Z'
     endDate: '2022-01-14T20:30:00.000Z'
     summary: Event example 2
@@ -33,6 +33,7 @@ data:
     end_month: jan
     end_day: 14
     end_time: '21:30'
+    recurring: true
 ```
 
 You can then do anything you want with the data and have a lot more versatility than with the standard binary sensor that Home Assistant's standard calendar integration provides. E.g. use the sensor to display the calendar data anywhere you want by using Home Assistant's [templating syntax](https://www.home-assistant.io/docs/configuration/templating/).

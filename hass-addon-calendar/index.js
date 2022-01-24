@@ -64,6 +64,7 @@ function getEvents() {
                 // for recurring events - so far only solution for yearly recurring
                 calendarItem[0].startDate = moment(calendarItem[0].startDate).add(1, 'years');
                 calendarItem[0].endDate = calendarItem[0].startDate;
+                calendarItem[0].recurring = true;
               }
               calendarItem[0].startDate = moment(calendarItem[0].startDate);
               calendarItem[0].year = calendarItem[0].startDate.format("YY");
@@ -74,6 +75,7 @@ function getEvents() {
               calendarItem[0].end_month = calendarItem[0].endDate.format("MMM");
               calendarItem[0].end_day = parseInt(calendarItem[0].endDate.format("DD"));
               calendarItem[0].end_time = calendarItem[0].endDate.format("HH:mm");
+              if (calendarItem[0].endDate == calendarItem[0].startDate.add(1, 'd')) {calendarItem[0].whole_day = true;}
               if (calendarItem[0].location) {calendarItem[0].location = calendarItem[0].location.replace(/\\/g, '');}
               allFutureEvents[`${sensorName}`].push(calendarItem[0]);
 
@@ -127,15 +129,31 @@ function getEvents() {
             calendarItem.summary = element.summary;
             if (element.location) {calendarItem.location = element.location.replace(/\\/g, '');}
             if (element.description) {calendarItem.label = element.description;}  
-            calendarItem.startDate = moment(element.start.dateTime);
-            calendarItem.endDate = moment(element.end.dateTime);
-            calendarItem.year = calendarItem.startDate.format("YY");
-            calendarItem.start_month = calendarItem.startDate.format("MMM");
-            calendarItem.start_day = parseInt(calendarItem.startDate.format("DD"));
-            calendarItem.start_time = calendarItem.startDate.format("HH:mm");
-            calendarItem.end_month = calendarItem.endDate.format("MMM");
-            calendarItem.end_day = parseInt(calendarItem.endDate.format("DD"));
-            calendarItem.end_time = calendarItem.endDate.format("HH:mm");
+            if (element.start.dateTime) {
+              calendarItem.startDate = moment(element.start.dateTime);
+              calendarItem.year = calendarItem.startDate.format("YY");
+              calendarItem.start_month = calendarItem.startDate.format("MMM");
+              calendarItem.start_day = parseInt(calendarItem.startDate.format("DD"));
+              calendarItem.start_time = calendarItem.startDate.format("HH:mm");
+            }
+            if (element.end.dateTime) {
+              calendarItem.endDate = moment(element.end.dateTime);
+              calendarItem.end_month = calendarItem.endDate.format("MMM");
+              calendarItem.end_day = parseInt(calendarItem.endDate.format("DD"));
+              calendarItem.end_time = calendarItem.endDate.format("HH:mm");
+            }
+            if (element.start.date) {
+              calendarItem.year = element.start.date.slice(0,4);
+              calendarItem.start_month = element.start.date.slice(5,7);
+              calendarItem.start_day = element.start.date.slice(8);
+              calendarItem.whole_day = true;
+            }
+            if (element.end.date) {
+              calendarItem.year = element.end.date.slice(0,4);
+              calendarItem.end_month = element.end.date.slice(5,7);
+              calendarItem.end_day = element.end.date.slice(8);
+            }
+            if (element.recurringEventId) {calendarItem.recurring = true;}
           
             allFutureEvents[`${sensorName}`].push(calendarItem);
           });

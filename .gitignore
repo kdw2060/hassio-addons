@@ -124,3 +124,6 @@ hassio-addon-api-consumer/consumers/old_grocyConsumer.js
 hassio-addon-api-consumer/consumers/buienalarmConsumer.js
 hass-addon-calendar/package-lock.json
 hass-addon-calendar/package-lock.json
+testing/local-testing.js
+testing/package.json
+testing/service-account-key.json
