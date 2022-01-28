@@ -40,7 +40,7 @@ You can then do anything you want with the data and have a lot more versatility 
 
 For instance `{{state_attr("sensor.my-calendar", "data")[0].summary}}` will render the summary of the first event in the list inside the data-attribute. 
 
-If you want inspiration have a look at the [family planner card]() I built with the data.
+If you want inspiration have a look at the [cards](/card-examples) I built with the data.
 
 Another common use would off course be to use the data in automation scripts.
 
