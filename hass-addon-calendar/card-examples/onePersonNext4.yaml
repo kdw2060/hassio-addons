@@ -1,0 +1,113 @@
+  type: custom:button-card
+  name: person-x
+  show_icon: false
+  show_name: false
+  entity: sensor.calendar.example
+  custom_fields:
+    person: '[[[ return `<img src="/local/images/icons8-face-generator-96.png"/>` ]]]'
+    calendar: >
+      [[[
+      let calSnippet = '';
+      
+      for (let i = 0; i < entity.state; i++) {
+        if (i > 3) {};
+        if (i <= 3 ) {
+        let start_month = entity.attributes.data[i].start_month;
+        let start_day = entity.attributes.data[i].start_day;
+        let start_time = entity.attributes.data[i].start_time;
+        let end_month = entity.attributes.data[i].end_month;
+        let end_day = entity.attributes.data[i].end_day;
+        let end_time = entity.attributes.data[i].end_time;
+        let time = start_time;
+        if (start_day !== end_day) {time = "meerdaags, tot " + end_day + " " + end_month};
+        if (end_day === start_day +1 && start_time === end_time) {time = "ganse dag"};
+        let event = entity.attributes.data[i].summary;
+        let location = entity.attributes.data[i].location;
+        if (location === "" || location === undefined) {location = "-"}
+      
+      calSnippet += 
+        `<table><tr>
+            <td class="date month">${start_month}</td><td class="event"><div class="event-title">${event}</div></td>
+          </tr>
+          <tr>
+            <td class="date day">${start_day}</td><td class="event"><span class="location"><ha-icon class="icon" icon="mdi:map-marker"></ha-icon>${location}</span><span class="time"><ha-icon class="icon" icon="mdi:clock-outline"></ha-icon>${time}</span></td>
+          </tr></table>`
+          }
+      }
+        
+      return calSnippet;
+      ]]]
+  styles:
+    card:
+      - color: rgba(0, 0, 0, 0.82)
+      - margin-top: 1em
+      - box-shadow: none
+    grid:
+      - grid-template-areas: '"person" "calendar"' 
+      - grid-template-columns: 1fr
+      - grid-template-rows: 1fr min-content
+    person:
+      - align-self: middle
+  style: |
+      img {
+        border-radius: 50%;
+        width: 120px;
+        margin-bottom: 1em;
+      }
+      .icon {
+        margin-right: 5%;
+        text-align: center;
+        float: left;
+        width: 16px;
+      }
+      table {
+        margin-left: 10px;
+        box-sizing: border-box;
+        border-spacing: 0;
+        margin-bottom: 1.25em;
+        width: 100%;
+      }
+      td {
+        white-space: -o-pre-wrap; 
+        word-wrap: break-word;
+        white-space: pre-wrap; 
+        white-space: -moz-pre-wrap; 
+        white-space: -pre-wrap; 
+      }
+      .date {
+        border-right: 2px solid #dc4225;
+        width: 20%;
+        text-align: center;
+      }
+      .event, .task {
+        padding-left: 10px;
+        width: 80%;
+      }
+      .month {
+        text-transform: uppercase;
+        vertical-align: bottom;
+      }
+      .day {
+        font-size: 1.8em;
+        vertical-align: top;
+      }
+      .event-title {
+        margin-top: 0;
+        font-size: 1.1em;
+        font-weight: 400;
+        text-align: left;
+        font-family: 'SF UI Text Semibold';
+        vertical-align: top;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .time, .location {
+        display: block;
+        text-align: left;
+        font-size: 0.9em;
+        padding-top: 5px;
+        font-family: SF UI Text Regular;
+      }
+      .time {
+        padding-bottom: 1em;
+      }
