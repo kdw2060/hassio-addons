@@ -127,3 +127,11 @@ hass-addon-calendar/package-lock.json
 testing/local-testing.js
 testing/package.json
 testing/service-account-key.json
+testing/package-lock.json
+testing/ics-to-json/readme.md
+testing/ics-to-json/package.json
+testing/ics-to-json/jest.config.js
+testing/ics-to-json/icsToJson.test.js
+testing/ics-to-json/icsToJson.js
+testing/ics-to-json/dist.js
+testing/ics-to-json/.travis.yml

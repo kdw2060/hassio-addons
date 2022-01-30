@@ -47,10 +47,14 @@ function getEvents() {
       axios(reqOptions1)
       .then((response) => {
         let data = response.data;
+        let counter = 0;
         const $ = cheerio.load(data, {xmlMode: true});
-        $("D\\:href").each(function(j, elem) {
+        $("*:contains('ics')").each(function(elem) {
+          if ($(this).text().includes('OK') == false ) { 
             let rawUriParts = $(this).text().split("/");
-            eventUris[j] = rawUriParts.pop();
+            eventUris[counter] = rawUriParts.pop();
+            counter++;
+          }
           });
       }, (error) => {console.log('axios error: ' + error.message + error.response);})
       .then(() => {
