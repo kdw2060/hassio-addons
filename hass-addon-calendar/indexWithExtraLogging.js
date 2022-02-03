@@ -85,6 +85,8 @@ function getEvents() {
             axios.get(caldavUrl + eventUris[i], reqOptions2).then(
               (response) => {
                 let calendarItem = icsToJson(response.data);
+                console.log(response.data);
+                console.log(calendarItem);
                 if (calendarItem[0] !== undefined) {
                   if (calendarItem[0].endDate == undefined) {
                     // for recurring events - so far only solution for yearly recurring
@@ -229,21 +231,12 @@ function postEventsAllCalendars() {
 //CRON//
 ////////
 
-//Upon restart, if events are stored and options unchanged, load and push to sensor(s)
+//Upon restart, if events are stored, load and push to sensor(s)
 if (fs.existsSync("/data/allFutureEvents.json")) {
+  /// dirty quick check in case add-on configuration has changed since last restart - needs more work
   let events = JSON.parse(fs.readFileSync("/data/allFutureEvents.json", "utf-8"));
   let firstCal = options.calendarList[0].calName;
-  let optionsDate;
-  try {
-    const stats = fs.statSync("/data/options.json");
-    console.log(`File Data Last Modified: ${stats.mtime}`);
-    console.log(`File Status Last Modified: ${stats.ctime}`);
-    optionsDate = stats.mtime;
-  } catch (error) {
-    console.log(error);
-  }
-  let optionsAge = moment().diff(moment(optionsDate), "hours", true);
-  if (events[`${firstCal}`] !== undefined && optionsAge > 0.5) {
+  if (events[`${firstCal}`] !== undefined) {
     postEventsAllCalendars();
     console.log("Previously stored events posted to sensor(s) at: " + new Date());
   }
