@@ -135,3 +135,4 @@ testing/ics-to-json/icsToJson.test.js
 testing/ics-to-json/icsToJson.js
 testing/ics-to-json/dist.js
 testing/ics-to-json/.travis.yml
+testing/allFutureEvents.json

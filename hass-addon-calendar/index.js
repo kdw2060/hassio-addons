@@ -233,17 +233,7 @@ function postEventsAllCalendars() {
 if (fs.existsSync("/data/allFutureEvents.json")) {
   let events = JSON.parse(fs.readFileSync("/data/allFutureEvents.json", "utf-8"));
   let firstCal = options.calendarList[0].calName;
-  let optionsDate;
-  try {
-    const stats = fs.statSync("/data/options.json");
-    console.log(`File Data Last Modified: ${stats.mtime}`);
-    console.log(`File Status Last Modified: ${stats.ctime}`);
-    optionsDate = stats.mtime;
-  } catch (error) {
-    console.log(error);
-  }
-  let optionsAge = moment().diff(moment(optionsDate), "hours", true);
-  if (events[`${firstCal}`] !== undefined && optionsAge > 0.5) {
+  if (events[`${firstCal}`] !== undefined) {
     postEventsAllCalendars();
     console.log("Previously stored events posted to sensor(s) at: " + new Date());
   }

@@ -36,7 +36,7 @@ calendarList:
 | calId                       | string | **if google** | the google calendar ID [more info](https://docs.simplecalendar.io/find-google-calendar-id/)                                                                                                                                                                       |
 | googleServiceAccountKeyfile | string | **if google** | filename of your google service-account credentials (more info about this below)                                                                                                                                                                                  |
 
-You can add as many calendars as you wish by repeating the parameters.
+You can add as many calendars as you wish by repeating the parameters. When you add a new calendar, add it at the beginning of the calendarList.
 
 ## Caldav
 
