@@ -1,6 +1,6 @@
 # HASS Calendar Addon
 
-This add-on can be used to load caldav and google calendar data and makes future calendar events available as sensordata in Home Assistant.
+This add-on can be used to load baikal, generic caldav and google calendar data and makes future calendar events available as sensordata in Home Assistant.
 
 There's one sensor per calendar, the sensor state equals the number of future events in your calendar and the data attribute of the sensor contains the events information.
 
@@ -17,9 +17,11 @@ data:
     label: 🎉 party-time
     year: '22'
     start_month: jan
+    start_month_digits: 01
     start_day: 8
     start_time: '21:00'
     end_month: jan
+    end_month_digits: 01
     end_day: 9
     end_time: '00:30'
   - startDate: '2022-01-14T17:30:00.000Z'
@@ -28,9 +30,11 @@ data:
     location: My house
     year: '22'
     start_month: jan
+    start_month_digits: 01
     start_day: 14
     start_time: '18:30'
     end_month: jan
+    end_month_digits: 01
     end_day: 14
     end_time: '21:30'
     recurring: true
@@ -46,11 +50,13 @@ Another common use would off course be to use the data in automation scripts.
 
 As you can see the start- and end-dates of the events are also available in split up form to make it easier to work with the data.
 
-For installation and configuration information see the DOCS.md file (on github) or click the docs tab (when reading this in Home Assistant.)
+**For installation and configuration information see the DOCS.md file (on github) or click the docs tab (when reading this in Home Assistant's addon store.)**
 
 ### To Do's
 - [ ] Caldav: better support for recurring events (now only yearly recurring will be correct)
-- [ ] Better detection of changed configuration
+- [x] ~~Better detection of changed configuration~~
+
+Thank you [cellerich](https://github.com/cellerich/hassio-addons/commits/master/hass-addon-calendar/DOCS.md?author=cellerich) for Baikal support and code improvements.
 
 ---
 

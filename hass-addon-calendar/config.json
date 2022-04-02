@@ -1,6 +1,6 @@
 {
     "name": "Hass Calendar Addon",
-    "version": "0.108",
+    "version": "0.200",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "hass_calendar_addon",
     "description": "Addon to consume caldav and google calendars and make future calendar events available as sensordata in Home Assistant.",
@@ -9,28 +9,36 @@
     "hassio_api": true,
     "homeassistant_api": true,
     "map": ["share" ],
-    "options": {"calendarList": [
+    "options": {
+      "locale": "nl-be",
+      "fetchDays": 365,
+      "fetchCRON": "*/30 * * * *",
+      "calendarList": [
       {
         "calName": null,
         "calType": null,
-        "locale": "nl",
         "username": "username",
         "password": "password",
-        "caldavUrl": "http://something (only for caldav)",
+        "caldavUrl": "http://something (only for caldav/baikal)",
         "calId": "googleCalendarId (only for Google Calendar)",
         "googleServiceAccountKeyfile": "yourServiceAccountJsonKeyfile (only for Google Calendar)"
         }
-      ]},
-    "schema": {"calendarList": [
-      {
-      "calName": "str",
-      "calType": "list(caldav|google)",
+      ]
+    },
+    "schema": {
       "locale": "str",
-      "username": "str?",
-      "password": "str?",
-      "caldavUrl": "str?",
-      "calId": "str?",
-      "googleServiceAccountKeyfile": "str?"
-      }  
-    ]}
+      "fetchDays": "int",
+      "fetchCRON": "str",
+      "calendarList": [
+      {
+        "calName": "str",
+        "calType": "list(caldav|google|baikal)",
+        "username": "str?",
+        "password": "str?",
+        "caldavUrl": "str?",
+        "calId": "str?",
+        "googleServiceAccountKeyfile": "str?"
+        }  
+      ]
+  }
   }
