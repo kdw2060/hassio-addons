@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.201 | 2022-05-16
+- compatibility-fix in config for latest Home Asistant version
+
 ## 0.200 | 2022-04-02
 This upgrade has BREAKING CHANGES because of the new configuration options.
 Upon upgrading make sure to update your config according to the DOCS before restarting the addon.
