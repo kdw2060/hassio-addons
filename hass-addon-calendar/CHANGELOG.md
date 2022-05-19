@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.202 | 2022-05-19
+Bugfix for compatibility fix of version 0.201
+
+## 0.201 | 2022-05-17
+Compatibility fix for new Home Assistant Add-on requirements.
+
 ## 0.200 | 2022-04-02
 This upgrade has BREAKING CHANGES because of the new configuration options.
 Upon upgrading make sure to update your config according to the DOCS before restarting the addon.
