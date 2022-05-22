@@ -44,17 +44,18 @@ You can add as many calendars as you wish by repeating the calendarList paramete
 
 ## Caldav
 
-I only tested against my own e-mail/caldav provider (GMX), it should probably work for other caldav-providers as well, but without testing I'm not sure of that.
+I only tested against my own e-mail/caldav provider (GMX). If you hit an issue with your caldav provider or selfhosted server check out the closed issues or feel free to open a new issue. Other users might be able to help you.
+
+### Apple icloud caldav
+
+To obtain the caldavUrl for your icloud calendar, follow the explanation in [the highest voted answer on this forum](https://askubuntu.com/questions/911567/how-to-sync-icloud-calendar). Your url should look like https://**\*\*\***.icloud.com/{dsid}/calendars/{calendarName}/ (Don’t forget to include the trailing forward slash). If you have trouble finding the right url, take a look at the solution in [this closed issue](https://github.com/kdw2060/hassio-addons/issues/10).
+
+Also make sure to generate an app-specific password like explained there and use this as the password you set in the add-on config.
 
 ## Baikal
 
 The add-on uses the jcal format querying the server. Make sure this plugin is installed in your Baikal instance. See [Baikal Plugin Info](https://sabre.io/dav/ics-export-plugin/) for more information.
 
-### Apple icloud caldav
-
-To obtain the caldavUrl for your icloud calendar, follow the explanation in [the highest voted answer on this forum](https://askubuntu.com/questions/911567/how-to-sync-icloud-calendar). Your url should look like https://**\*\*\***.icloud.com/{dsid}/calendars/{calendarName}/ (Don’t forget to include the trailing forward slash).
-
-Also make sure to generate an app-specific password like explained there and use this as the password you set in the add-on config.
 
 ## Google Calendar
 
