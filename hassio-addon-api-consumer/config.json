@@ -1,6 +1,6 @@
 {
     "name": "API Consumer",
-    "version": "0.111",
+    "version": "0.112",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "api_consumer",
     "description": "Create and update sensors through the HA api",

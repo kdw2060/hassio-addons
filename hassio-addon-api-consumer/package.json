@@ -1,6 +1,6 @@
 {
   "name": "api_consumer",
-  "version": "0.111",
+  "version": "0.112",
   "description": "Create and update sensors through the HA api",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "moment": "^2.29.1",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "uuid": "^8.3.2"
   }
 }
