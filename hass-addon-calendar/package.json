@@ -14,7 +14,7 @@
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "googleapis": "^92.0.0",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "node-cron": "^3.0.0"
   }
 }
