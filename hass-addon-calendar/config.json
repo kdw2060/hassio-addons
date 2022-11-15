@@ -1,9 +1,9 @@
 {
     "name": "Hass Calendar Addon",
-    "version": "0.202",
-    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+    "version": "0.300",
+    "arch": ["armv7", "aarch64", "amd64"],
     "slug": "hass_calendar_addon",
-    "description": "Addon to consume caldav and google calendars and make future calendar events available as sensordata in Home Assistant.",
+    "description": "Addon to consume caldav and google calendars and make calendar events available as sensordata in Home Assistant.",
     "url": "https://github.com/kdw2060/hassio-addons/tree/master/hass-addon-calendar",
     "startup": "application",
     "init": false,
@@ -12,9 +12,11 @@
     "hassio_role": "default",
     "map": ["share" ],
     "options": {
-      "locale": "nl-be",
-      "fetchDays": 365,
-      "fetchCRON": "*/30 * * * *",
+      "locale": null,
+      "timeZone": "",
+      "fetchDays": null,
+      "fetchDaysPast": 0,
+      "fetchCRON": null,
       "calendarList": [
       {
         "calName": null,
@@ -29,7 +31,9 @@
     },
     "schema": {
       "locale": "str",
+      "timeZone": "str?",
       "fetchDays": "int",
+      "fetchDaysPast": "int?",
       "fetchCRON": "str",
       "calendarList": [
       {
