@@ -238,9 +238,9 @@ async function getEvents() {
         });
         console.log(counter + ' entries found in caldav calendar')
         allFutureEvents[`${sensorName}`] = [];
-        console.log('caldav allFutureEvents object reset');
 
         // Download and parse ics data of events
+        let eventsCounter = 0;
         eventUris.forEach( async function (uri) {
           try {
             let calendarItem = {};
@@ -359,17 +359,21 @@ async function getEvents() {
               }    
             };
             allFutureEvents[`${sensorName}`].push(calendarItem);
+            eventsCounter++;
+            // Sort calendar entries
+            if (eventsCounter === eventUris.length) {
+              console.log('sorting events of calendar: ' + sensorName);
+              allFutureEvents[`${sensorName}`].sort(function (a, b) {
+              a = new Date(a.startDateISO);
+              b = new Date(b.startDateISO);
+              return a > b ? 1 : a < b ? -1 : 0;
+              });
+            }
           })
           }
           catch (error) {
             console.log("error with: " + error + error.response);
           }
-        });
-        // Sort calendar entries
-        allFutureEvents[`${sensorName}`].sort(function (a, b) {
-          a = new Date(a.startDate);
-          b = new Date(b.startDate);
-          return a > b ? 1 : a < b ? -1 : 0;
         });
       }
       catch (error) {
@@ -405,7 +409,6 @@ async function getEvents() {
           }
           if (res.status === 200) {
             allFutureEvents[`${sensorName}`] = [];
-            console.log('google allFutureEvents object reset');
             console.log(res.data.items.length  + ' entries found in google calendar');
             res.data.items.forEach((element) => {
               console.log('Fetching google calendar entry ' + element.id);
@@ -457,7 +460,6 @@ async function getEvents() {
               if (element.recurringEventId) {
                 calendarItem.recurring = true;
               }
-
               allFutureEvents[`${sensorName}`].push(calendarItem);
             });
           }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.301 | 2022-11-19
+
+Bugfix for sorting of caldav calendar events.
+
 ## 0.300 | 2022-11-15
 
 🎁 NEW
@@ -13,26 +17,3 @@
 🚧 BREAKING CHANGES
 - I renamed some of the data fields, they all use camelCase now. You might have to rename them in your YAML code too if you use these fields. The new standard formatting for start- and end-dates might also impact your existing implementation.
 - **Baikal support untested!** If you use this add-on with a Baikal calendar and use the 'baikal' type in stead of 'caldav' in the add-on options, then **I'd advise you don't update the add-on immediately and first test out this new version by installing it locally.** Also non of the new features have been applied to the baikal option. If someone wants to volunteer to debug and develop the Baikal part of the add-on feel free to reach out on Github.
-
-## 0.202 | 2022-05-19
-
-Bugfix for compatibility fix of version 0.201
-
-## 0.201 | 2022-05-17
-
-Compatibility fix for new Home Assistant Add-on requirements.
-
-## 0.200 | 2022-04-02
-
-This upgrade has BREAKING CHANGES because of the new configuration options.
-Upon upgrading make sure to update your config according to the DOCS before restarting the addon.
-
-Incorporated @cellerich's improvements:
-- compatibility with baikal caldav 
-- use proper async javascript syntax
-- extra configuration options: number of days to query + query frequency can now be set as options in stead of the fixed values that were set earlier, read the docs.md for more information on how to configure
-
-## 0.109 | 2022-02-01
-
-- start- and end-month are available in 2-digit format now as well
-- bumped dependencies

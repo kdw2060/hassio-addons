@@ -20,7 +20,7 @@ RUN \
         tzdata=2022f-0ubuntu0.20.04.0 \
         nodejs \
     \
-    && npm install -g npm@9.1.1 \
+    && npm install -g npm@9.1.2 \
     && apt-get -y clean \
     && rm -fr \
         /tmp/* \

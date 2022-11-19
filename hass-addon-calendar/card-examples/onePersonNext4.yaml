@@ -12,15 +12,16 @@
       for (let i = 0; i < entity.state; i++) {
         if (i > 3) {};
         if (i <= 3 ) {
-        let start_month = entity.attributes.data[i].start_month;
-        let start_day = entity.attributes.data[i].start_day;
-        let start_time = entity.attributes.data[i].start_time;
-        let end_month = entity.attributes.data[i].end_month;
-        let end_day = entity.attributes.data[i].end_day;
-        let end_time = entity.attributes.data[i].end_time;
+        let start_month = entity.attributes.data[i].startMonth;
+        let start_day = entity.attributes.data[i].startDay;
+        let start_time = entity.attributes.data[i].startTime;
+        let end_month = entity.attributes.data[i].endMonth;
+        let end_day = entity.attributes.data[i].endDay;
+        let end_time = entity.attributes.data[i].endTime;
         let time = start_time;
-        if (start_day !== end_day) {time = "meerdaags, tot " + end_day + " " + end_month};
-        if (end_day === start_day +1 && start_time === end_time) {time = "ganse dag"};
+        let wholeDay = entity.attributes.data[i].wholeDay;
+        if (end_day != null && start_day !== end_day) {time = "meerdaags, tot " + end_day + " " + end_month};
+        if (wholeDay === true) {time = "ganse dag"};
         let event = entity.attributes.data[i].summary;
         let location = entity.attributes.data[i].location;
         if (location === "" || location === undefined) {location = "-"}
