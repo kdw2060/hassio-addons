@@ -15,7 +15,7 @@
     "cheerio": "^1.0.0-rc.10",
     "full-icu": "^1.5.0",
     "googleapis": "^92.0.0",
-    "luxon": "^3.0.1",
+    "luxon": "^3.2.1",
     "node-cron": "^3.0.0",
     "node-ical": "^0.15.2"
   }
