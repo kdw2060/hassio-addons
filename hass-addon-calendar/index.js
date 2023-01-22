@@ -261,7 +261,7 @@ async function getEvents() {
               if (data[k].type === 'VEVENT') {
                 // Parse all the basic event fields
                 calendarItem.summary = event.summary;
-                if (event.location) {calendarItem.location = event.location.replace(/\\/g, "");}
+                if (event.location) {calendarItem.location = event.location.replace(/(\r\n|\n|\r)/gm, ", ");}
                 if (event.categories) {calendarItem.label = event.categories[0];}
                 if (event.description) {calendarItem.description = event.description;}
                 calendarItem.startDate = DateTime.fromISO(event.start.toISOString()).toLocaleString(DateTime.DATETIME_SHORT);
