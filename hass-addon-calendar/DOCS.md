@@ -77,7 +77,7 @@ Because it was easier to implement for me I chose to use the google service acco
 ## Baikal
 **<span style="color:red">UNTESTED - NOT GUARANTEED TO WORK</span>** --> read the changelog for version 0.300
 The `baikal` calenderType add-on option relies on a baikal export plugin that provides the calendar data in jcal format. Make sure this plugin is installed in your Baikal instance. See [Baikal Plugin Info](https://sabre.io/dav/ics-export-plugin/) for more information.
-Alternative you should also be able to just use the `caldav` type with a Baikal server.
+Alternatively you should also be able to just use the `caldav` type with a Baikal server.
 
 
 # First run and data persistence

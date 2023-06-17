@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.302 | 2023-06-17
+
+Improved parsing of Outlook 365 ICS files when these contain objects in stead of plain strings for values like the event summary. (contributed by @mika255)
+
 ## 0.301 | 2022-11-19
 
 Bugfix for sorting of caldav calendar events.
