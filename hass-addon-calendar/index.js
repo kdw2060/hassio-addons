@@ -257,13 +257,37 @@ async function getEvents() {
             for (const k in data) {
               if (!{}.hasOwnProperty.call(data, k)) 
               continue;
+
               let event = data[k];
+
               if (data[k].type === 'VEVENT') {
+
                 // Parse all the basic event fields
-                calendarItem.summary = event.summary;
-                if (event.location) {calendarItem.location = event.location.replace(/(\r\n|\n|\r)/gm, ", ");}
-                if (event.categories) {calendarItem.label = event.categories[0];}
-                if (event.description) {calendarItem.description = event.description;}
+                //console.log("Parsing event " + JSON.stringify(event.summary) );
+                
+                if (event.summary) {
+                  let tempString = (typeof event.summary === 'string') ? event.summary : event.summary.val.toString();
+                  //console.log("...has summary " + tempString);
+                  calendarItem.summary = tempString.replace(/(\r\n|\n|\r)/gm, ", ");
+                }
+
+                if (event.location) {
+                  let tempString = (typeof event.location === 'string') ? event.location : event.location.val.toString();
+                  //console.log("...has location " + tempString);
+                  calendarItem.location = tempString.replace(/(\r\n|\n|\r)/gm, ", ");
+                }
+
+                if (event.categories) {
+                    //console.log("...has categories " + event.categories[0]);
+                    calendarItem.label = event.categories[0];
+                }
+
+                if (event.description) {
+                  let tempString = (typeof event.description === 'string') ? event.description : event.description.val.toString();
+                  //console.log("...has description " + tempString);
+                  calendarItem.description = tempString;
+                }
+
                 calendarItem.startDate = DateTime.fromISO(event.start.toISOString()).toLocaleString(DateTime.DATETIME_SHORT);
                 let startDateISO = DateTime.fromISO(event.start.toISOString());
                 calendarItem.startDateISO = DateTime.fromISO(event.start.toISOString()).toString();
