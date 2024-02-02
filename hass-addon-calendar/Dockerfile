@@ -14,7 +14,7 @@ ENV \
 RUN \ 
     apt-get update \
     \
-    && curl -s -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && curl -s -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     \
     && apt-get install -y --no-install-recommends \
         tzdata=2022f-0ubuntu0.20.04.0 \
