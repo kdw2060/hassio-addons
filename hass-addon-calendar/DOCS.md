@@ -17,7 +17,7 @@ locale: nl-BE
 timeZone: Europe/Brussels
 calendarList:
   - calName: someName
-    calType: one of caldav|google|baikal
+    calType: one of caldav|google
     username: username
     password: password
     caldavUrl: https://yourcaldavserver.domain/somePath/calendarName/
@@ -36,10 +36,10 @@ calendarList:
 | locale   | string | **always**  | a locale to get date/time presentation and translation right. Locales must be supported by [Luxon](https://moment.github.io/luxon/#/intl?id=how-locales-work) |
 | timeZone | string | optional   | will default to system timeZone. If you want to override, then enter a timezone like [Luxon expects it](https://moment.github.io/luxon/#/zones?id=specifying-a-zone). I suggest you enter a IANA timezone string. |
 | calName  | string | **always**    | any name you prefer, this will also become the sensor-name|
-| calType  | string | **always**    | set to either `caldav`, `baikal` or `google` |
-| username | string | **if caldav or baikal** | the username you login with for your caldav-provider|
-| password | string | **if caldav or baikal** | the password you login with for your caldav-provider |
-| caldavUrl | string | **if caldav or baikal** | the https address for your caldav-calendar.<br> - if caldav: **make sure to include the slash at the end**     E.g. 'https://caldav.gmx.net/begenda/dav/your-email-adress/calendar/' <br> - if baikal: **make sure to NOT include the slash at the end**     E.g. 'https://cal.myserver.net/dav.php/calendars/user/calendarname'|
+| calType  | string | **always**    | set to either `caldav` or `google` |
+| username | string | **if caldav** | the username you login with for your caldav-provider|
+| password | string | **if caldav** | the password you login with for your caldav-provider |
+| caldavUrl | string | **if caldav** | the https address for your caldav-calendar.<br> **make sure to include the slash at the end**     E.g. 'https://caldav.gmx.net/begenda/dav/your-email-adress/calendar/' <br> |
 | calId | string | **if google** | the google calendar ID [more info](https://docs.simplecalendar.io/find-google-calendar-id/) |
 | googleServiceAccountKeyfile | string | **if google** | filename of your google service-account credentials (more info about this below) |
 
@@ -67,23 +67,17 @@ Because it was easier to implement for me I chose to use the google service acco
 2. Enable the google calendar api:
    The guide finishes by telling you how to enable the google drive api, that however is not what is needed here, **make sure to enable the google calendar api instead!**
 
-3. Download service account credentials and store in HA share folder:
-   The guide also describes how to obtain the json file with your service account credentials. You need to place that file in the `/share` folder of your Home Assistant installation. This add-on expects that to be the location. You can get easy access to this folder with the samba add-on. The filename is to be provided as a configuration parameter.
+3. Download service account credentials and store in the addon's config folder:
+   The guide also describes how to obtain the json file with your service account credentials. You need to place that file in the `addon_configs/hass_calendar_addon` folder of your Home Assistant installation. This add-on expects that to be the location. You can get easy access to this folder with the samba add-on. The filename is to be provided as a configuration parameter.
 
 4. Give the service account access to your specific calendar:
    Finally you need to add the auto-generated e-mail adress of your service account in the google calendar settings under the list of people the calendar is shared with. Repeat this step for all google calendars you want to add in the calendarList.
 
 
-## Baikal
-**<span style="color:red">UNTESTED - NOT GUARANTEED TO WORK</span>** --> read the changelog for version 0.300
-The `baikal` calenderType add-on option relies on a baikal export plugin that provides the calendar data in jcal format. Make sure this plugin is installed in your Baikal instance. See [Baikal Plugin Info](https://sabre.io/dav/ics-export-plugin/) for more information.
-Alternatively you should also be able to just use the `caldav` type with a Baikal server.
-
 
 # First run and data persistence
+If you run the add-on for the very first time it will try to fetch the data for all your calendards immediately. It will do so too when the add-on config has been changed.
 
-If you run the add-on for the first time an error `Cannot read properties of undefined` will probably appear in the logs and you may have to wait untill the second fetch run before the data shows up in the sensor.
+Depending on the CRON-schedule you configured the data will be refreshed. I advise not to overload the google or caldav api's. I choose to only query them every 30 or 60 minutes. You can see in the addon logs when a query has run and when the data is posted to the sensor(s).
 
-Depending on the CRON-schedule you configured the data will be refreshed. I advise not to overload the google or caldav api's. I choose to only query them every 30 minutes. You can see in the addon logs when a query has run and when the data is posted to the sensor(s).
-
-The queried data is saved to a file in persistent storage and this is used upon restarts of the add-on, so after a restart you shouldn't need to wait normally.
+The queried data is saved to a file in persistent storage and this is used upon restarts of the add-on, so after a system restart you should immediately see the calendar sensor.

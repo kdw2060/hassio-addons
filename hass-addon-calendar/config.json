@@ -1,6 +1,6 @@
 {
     "name": "Hass Calendar Addon",
-    "version": "0.302",
+    "version": "0.400",
     "arch": ["armv7", "aarch64", "amd64"],
     "slug": "hass_calendar_addon",
     "description": "Addon to consume caldav and google calendars and make calendar events available as sensordata in Home Assistant.",
@@ -10,7 +10,7 @@
     "hassio_api": true,
     "homeassistant_api": true,
     "hassio_role": "default",
-    "map": ["share" ],
+    "map": ["addon_config"],
     "options": {
       "locale": null,
       "timeZone": "",
@@ -23,7 +23,7 @@
         "calType": null,
         "username": "username",
         "password": "password",
-        "caldavUrl": "http://something (only for caldav/baikal)",
+        "caldavUrl": "http://something (only for caldav)",
         "calId": "googleCalendarId (only for Google Calendar)",
         "googleServiceAccountKeyfile": "yourServiceAccountJsonKeyfile (only for Google Calendar)"
         }

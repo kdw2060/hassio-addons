@@ -1,6 +1,6 @@
 {
   "name": "hass-calendar-addon",
-  "version": "0.302",
+  "version": "0.400",
   "description": "Addon to consume caldav and google calendars and make the calendar events available as sensordata in Home Assistant.",
   "main": "index.js",
   "scripts": {
@@ -11,12 +11,12 @@
   "repository": "https://github.com/kdw2060/hassio-addons/tree/master/hass-addon-calendar",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^1.6.3",
     "cheerio": "^1.0.0-rc.10",
     "full-icu": "^1.5.0",
     "googleapis": "^92.0.0",
     "luxon": "^3.0.1",
     "node-cron": "^3.0.0",
-    "node-ical": "^0.15.2"
+    "node-ical": "^0.17.1"
   }
 }

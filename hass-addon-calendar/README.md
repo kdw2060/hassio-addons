@@ -66,21 +66,18 @@ For caldav calendars the `recurring` field will return *false* or one of *yearly
 
 For google calendars the `recurring` field will simply return *true* or *false* and no `nextOccurences` field will be present. The google api should however return seperate events for all next occurences within the fetched period.
 
-For Baikal caldav calendars that are queried using the `baikal` option and return their data as jcal (plugin for Baikal required) the `recurring` field will simply return *true* or *false*. No extra work has been put into further optimising the support for recurring events here. As stated in the changelog for version 0.300, if someone wants to volunteer to debug and develop the Baikal part of the add-on feel free to reach out on Github.
-
 Wholeday events are labeled as such with the `wholeDay` field returning *true*. All endDate information is then stripped from the calendar entry. It may still appear accidentally if the data was formatted unexpectedly.
 
 ### Installation
 **For installation and configuration information see the DOCS.md file (on github) or click the docs tab (when reading this in Home Assistant's add-on store.)**
 
-### To Do's
-- [ ] Fix async fetching issue on first fetch run
-- [ ] Add handling of multiday events that don't have a specic start/end time
-- [ ] Maybe add support for todo's
+### Roadmap
+- [x] ~~Fix async fetching issue on first fetch run~~
+- [x] ~~Add handling of multiday events that don't have a specic start/end time~~
 - [x] ~~Caldav: better support for recurring events~~
 - [x] ~~Better detection of changed configuration~~
-
-Thank you [cellerich](https://github.com/cellerich/hassio-addons/commits/master/hass-addon-calendar/DOCS.md?author=cellerich) for Baikal support and code improvements.
+- [ ] Maybe add support for todo's
+- [ ] Maybe add support for public calendars
 
 ---
 
