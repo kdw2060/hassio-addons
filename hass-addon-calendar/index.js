@@ -400,7 +400,7 @@ async function getEvents() {
             }
           }
           catch (error){
-            console.log("There was an error loading the gcal data: " + err);
+            console.log("There was an error loading the gcal data: " + error);
           }          
         } //END of GOOGLE fetch block
       } //END of for loop

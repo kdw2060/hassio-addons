@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.401 | 2024-02-20
+
+🐛 BUGFIXES
+- fixed typo in error catching google calendar fetch call
+- Revert nodejs and npm upgrades (should fix install issues)
+
+
 ## 0.400 | 2024-02-02
 
 🚧 BREAKING CHANGES

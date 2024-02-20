@@ -14,13 +14,13 @@ ENV \
 RUN \ 
     apt-get update \
     \
-    && curl -s -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -s -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     \
     && apt-get install -y --no-install-recommends \
         tzdata=2022f-0ubuntu0.20.04.0 \
         nodejs \
     \
-    && npm install -g npm@10.4.0 \
+    && npm install -g npm@9.1.2 \
     && apt-get -y clean \
     && rm -fr \
         /tmp/* \
