@@ -35,7 +35,7 @@ calendarList:
 | fetchCRON | string | **always** | CRON-pattern that determines when/how often the calendar data should be fetched. [Help for generating a pattern](https://crontab.guru/)|     
 | locale   | string | **always**  | a locale to get date/time presentation and translation right. Locales must be supported by [Luxon](https://moment.github.io/luxon/#/intl?id=how-locales-work) |
 | timeZone | string | optional   | will default to system timeZone. If you want to override, then enter a timezone like [Luxon expects it](https://moment.github.io/luxon/#/zones?id=specifying-a-zone). I suggest you enter a IANA timezone string. |
-| calName  | string | **always**    | any name you prefer, this will also become the sensor-name|
+| calName  | string | **always**    | any name you prefer, this will also become the sensor-name and so must respect HA entity-id naming restrictions (no spaces for instance)|
 | calType  | string | **always**    | set to either `caldav` or `google` |
 | username | string | **if caldav** | the username you login with for your caldav-provider|
 | password | string | **if caldav** | the password you login with for your caldav-provider |
@@ -51,7 +51,7 @@ I tested against my own e-mail/caldav provider (GMX) and a set of test ICS files
 
 ### Apple icloud caldav
 
-To obtain the caldavUrl for your icloud calendar, follow the explanation in [the highest voted answer on this forum](https://askubuntu.com/questions/911567/how-to-sync-icloud-calendar). Your url should look like https://**\*\*\***.icloud.com/{dsid}/calendars/{calendarName}/ (Don’t forget to include the trailing forward slash). 
+To obtain the caldavUrl for your icloud calendar, follow the explanation in [the highest voted answer on this forum](https://askubuntu.com/questions/911567/how-to-sync-icloud-calendar). Your url should look like https://**\*\*\***.icloud.com/{dsid}/calendars/{guid}/ (Don’t forget to include the trailing forward slash). 
 
 Also make sure to generate an app-specific password like explained there and use this as the password you set in the add-on config.
 
