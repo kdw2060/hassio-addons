@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.500 | 2024-03-10
+
+ Switched docker base image for addon to nodejs base image from Home Assistant addon repo. No new features or bugfixes.
+
+
 ## 0.401 | 2024-02-20
 
 🐛 BUGFIXES

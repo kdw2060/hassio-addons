@@ -1,19 +1,14 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+# ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-nodejs:0.1.4
+FROM ${BUILD_FROM}
 
-ENV LANG C.UTF-8
-
-ADD package.json /
-
-
-RUN \ 
-    apk add --no-cache \
-        nodejs \
-        npm
+WORKDIR /app
 
 # Copy data for add-on
-COPY run.sh /
-COPY index.js /
-RUN chmod a+x /run.sh
+COPY nodejsApp /app
 
-CMD [ "/run.sh" ]
+RUN npm install
+
+RUN chmod a+x /app/run.sh
+
+CMD [ "/app/run.sh" ]
