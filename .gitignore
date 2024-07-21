@@ -145,3 +145,5 @@ ha-nodejs-base-image/s6-overlay/etc/s6-rc/sources/fix-attrs/dependencies.d/base-
 ha-nodejs-base-image/s6-overlay/etc/s6-rc/sources/legacy-cont-init/dependencies.d/base-addon-log-level
 hass-addon-calendar/package-lock.json
 hass-addon-calendar/package-lock.json
+hass-addon-calendar/package-lock.json
+hass-addon-calendar/package-lock.json

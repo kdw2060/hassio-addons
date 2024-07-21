@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.501 | 2024-07-21
+
+ Bump versions of docker base image and some dependencies.
+
+
 ## 0.500 | 2024-03-10
 
  Switched docker base image for addon to nodejs base image from Home Assistant addon repo. No new features or bugfixes.

@@ -1,8 +1,9 @@
 {
   "name": "api_consumer",
-  "version": "0.112",
+  "version": "0.200",
   "description": "Create and update sensors through the HA api",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,10 +12,10 @@
   "repository": "https://github.com/kdw2060/hassio-addons/tree/master/hassio-addon-api-consumer",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.10",
     "moment": "^2.29.1",
-    "node-cron": "^3.0.0",
+    "node-cron": "^3.0.3",
     "uuid": "^8.3.2"
   }
 }

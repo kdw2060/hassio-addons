@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/command/with-contenv bashio
 
 set +e
 if [ -n "$TZ" ] && [ -f /etc/localtime ]; then

@@ -1,12 +1,11 @@
 # API Consumer
 
-This add-on provides a reusable template that can be used to consume any (web-)api with a custom Node.js script and post the data this api provides to the Home Assistant state machine using the internal Home Assistant api. 
+This add-on provides a reusable template that can be used to consume any (web-)api with a custom Node.js script and post the data this api provides to the Home Assistant state machine using the internal Home Assistant api.
 
 ### Why use this
-It's useful when you're trying to achieve something that hits the limits of the Home Assistant built in [rest sensor](https://www.home-assistant.io/integrations/rest/) platform or when an existing component/integration is not providing you all the data that you would like even though the underlying service is able to provide it. 
+It's useful when you're trying to achieve something that hits the limits of the Home Assistant built in [rest sensor](https://www.home-assistant.io/integrations/rest/) platform or when an existing component/integration is not providing you all the data that you would like even though the underlying service is able to provide it.
 
 Essentialy the pattern used here is another way to write a custom component. I made it because I'm more comfortable writing Javascript than Python and because I came to the conclusion that it's better to stuff data in the state machine than making custom cards. 
-
 
 
 ---
