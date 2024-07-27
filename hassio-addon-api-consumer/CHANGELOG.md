@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.202 | 2024-07-27
+Forgot to adjust import statement, fixed
+
 ## 0.201 | 2024-07-27
 Revert to older Axios version + bugfixes in OMV consumer
 

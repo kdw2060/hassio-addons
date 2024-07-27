@@ -1,6 +1,6 @@
 {
   "name": "api_consumer",
-  "version": "0.201",
+  "version": "0.202",
   "description": "Create and update sensors through the HA api",
   "main": "index.js",
   "scripts": {

@@ -1,8 +1,9 @@
 {
     "name": "Starter project for Node.js based Hass.io addons",
-    "version": "0.101",
+    "version": "0.102",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "slug": "nodejs_starter_hassio",
+    "init": false,
     "description": "Starter project for Node.js based Hass.io addons",
     "startup": "application",
     "boot": "auto",

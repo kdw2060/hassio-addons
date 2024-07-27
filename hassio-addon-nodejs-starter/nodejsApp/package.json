@@ -1,6 +1,6 @@
 {
   "name": "nodejs_starter_hassio",
-  "version": "0.101",
+  "version": "0.102",
   "description": "Starter project for Node.js based Home Assistan addons",
   "main": "index.js",
   "scripts": {
