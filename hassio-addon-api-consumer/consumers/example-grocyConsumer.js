@@ -3,8 +3,8 @@
 //////////
 // The Node.js libraries we'll be using
 // Note the absolute path here to the file system of the Docker instance this add-on runs in because npm install is executed there but this consumer file is located in /share/consumers. 
-const axios = require('/node_modules/axios');
-const cron = require('/node_modules/node-cron');
+const axios = require('/app/node_modules/axios');
+const cron = require('/app/node_modules/node-cron');
 
 // HOME ASSISTANT API OPTIONS
 // This gets the supervisor token and configures the header for the posts to the Home Assistant api that we will be doing. No need to change anything here.
@@ -23,7 +23,8 @@ const reqOptions = { headers: {'GROCY-API-KEY': '*redacted*'} };
 ///////////////////////
 
 // One or more functions that fetch the data and post it to Home Assistant sensor(s) 
-//This particular consumer was built because the existing Grocy component you can get through Hacs doesn't include a sensor for the Tasks entered in Grocy. For now I've chosen to just map the Grocy api-calls one on one to three sensors. You could however also choose to combine the data first and then send only one data object to HA.
+// This particular consumer was built because at the time the existing Grocy component you can get through Hacs didn't include a sensor for the Tasks entered in Grocy. It is obsolete nowadays.
+// For now I've chosen to just map the Grocy api-calls one on one to three sensors. You could however also choose to combine the data first and then send only one data object to HA.
 
 function getTasks() {
   // Define sensor object
@@ -43,7 +44,7 @@ function getTasks() {
 
 
       // 3. Then post the data to Home Assistant
-      // Because our response exceeds the 255 character limit for the sensor state, we set it as a sensor attribute. For the state i set the length of the data array, which will equal the number of tasks.
+      // Because our response exceeds the 255 character limit for the sensor state, we set it as a sensor attribute. For the state I set the length of the data array, which will equal the number of tasks.
       // Each use case will have its own requirements, define the post body object as you see fit.
       axios.post('http://supervisor/core/api/states/sensor.' + sensorName, 
         { state: sensorData.length,

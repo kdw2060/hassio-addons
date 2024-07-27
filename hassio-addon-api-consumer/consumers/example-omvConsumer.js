@@ -19,7 +19,6 @@ let header = {headers: {updatelastaccess: true, cookie: cookieJar}};
 //GETTERS AND SETTERS//
 ///////////////////////
 
-// API calls
 async function login() {
   const postBody = {
     "service": "Session",
@@ -41,7 +40,6 @@ async function login() {
 
 async function getSystemInfo() {
     let sensorData;
-    console.log("test1");
     const postBody = {
         "service": "System",
         "method": "getInformation",
@@ -81,7 +79,11 @@ function getNetworkInfo(){
     .then((response) => {
         if (response.status == 200) {
           sensorData = response.data.response;
-          // console.log(sensorData);
+          //Strip unwanted networks
+          let specificDeviceNames = ['br0', 'enp3s0'];
+          sensorData = sensorData.filter(item => specificDeviceNames.includes(item.devicename));
+          //console.log(sensorData);
+          // Then post the data to Home Assitant
           axios.post('http://supervisor/core/api/states/sensor.omv_network', 
             { state: 'none',
             attributes: {data: sensorData}
@@ -141,18 +143,20 @@ function getDiskInfo(){
     axios.post(baseUrl, postBody, header)
     .then((response) => {
         if (response.status == 200) {
-          let res = response.data.response.data;
-          let numberOfFS = res.length();
+          let res = response.data.response;
+          let keys = Object.keys(res);
+          let numberOfFS = keys.length;
           // Transform the data
-          for (let i=0; i < numberOfFS; i++) {
+          for (let i = 0; i < numberOfFS; i++) {
+            let key = keys[i];
             let diskInfo = {};
-            diskInfo.devicename = res[i].devicename;
-            diskInfo.label = res[i].label;
-            diskInfo.used = res[i].used;
-            diskInfo.available = res[i].available;
-            diskInfo.size = res[i].size;
-            diskInfo.percentage = res[i].percentage;
-            diskInfo.description = res[i].description;
+            diskInfo.devicename = res[key].devicename;
+            diskInfo.label = res[key].label;
+            diskInfo.used = res[key].used;
+            diskInfo.available = res[key].available;
+            diskInfo.size = res[key].size;
+            diskInfo.percentage = res[key].percentage;
+            diskInfo.description = res[key].description;
             sensorData.push(diskInfo);
           }
           // console.log(sensorData);
