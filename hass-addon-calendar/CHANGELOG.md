@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.510 | 2025-11-15
+
+ - Rebased docker image to the latest standard Alpine image from the Home Assistant repository.
+ - Bump versions of dependencies.
+
 ## 0.501 | 2024-07-21
 
  Bump versions of docker base image and some dependencies.
