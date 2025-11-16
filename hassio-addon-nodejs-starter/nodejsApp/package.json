@@ -1,7 +1,7 @@
 {
   "name": "nodejs_starter_hassio",
-  "version": "0.102",
-  "description": "Starter project for Node.js based Home Assistan addons",
+  "version": "0.200",
+  "description": "Starter project for Node.js based Home Assistant addons",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,6 @@
   "author": "kdw2060",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.20.0"
   }
 }
