@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.520 | 2026-08-13
+
+🎁 NEW
+- Optional `exposeToAssist` setting. When enabled, the add-on exposes each calendar sensor to Assist via the Home Assistant websocket API. This does not add a unique ID (Home Assistant does not allow add-ons to register entities that way), but Assist can still use the sensors.
+
 ## 0.510 | 2025-11-15
 
  - Rebased docker image to the latest standard Alpine image from the Home Assistant repository.

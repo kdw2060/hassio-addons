@@ -2,7 +2,7 @@
 
 This add-on can be used to load caldav and google calendar data and makes your calendar events available as sensordata in Home Assistant.
 
-There's one sensor per calendar, the sensor state equals the number of events in your calendar and the data attribute of the sensor contains the events information.
+There's one sensor per calendar, the sensor state equals the number of events in your calendar and the data attribute of the sensor contains the events information. Enable `exposeToAssist` if you want those sensors available to Assist.
 
 Example:
 

@@ -417,12 +417,80 @@ async function getEvents() {
 //////////////////////////////////////////////
 // Functions to post data to Home Assistant //
 //////////////////////////////////////////////
+let assistExposed = false;
+
+function sensorEntityId(sensorName) {
+  return "sensor." + String(sensorName).toLowerCase();
+}
+
+async function exposeSensorsToAssist(sensorNames) {
+  const entityIds = sensorNames.map(sensorEntityId);
+  const WSImpl = typeof WebSocket !== "undefined" ? WebSocket : null;
+  if (!WSImpl) {
+    console.log("Cannot auto-expose to Assist: WebSocket is not available in this Node.js runtime");
+    return false;
+  }
+  return new Promise((resolve) => {
+    let settled = false;
+    const done = (ok, err) => {
+      if (settled) return;
+      settled = true;
+      if (err) {
+        console.log("exposeToAssist error: " + err);
+      } else if (ok) {
+        console.log("Exposed sensors to Assist: " + entityIds.join(", "));
+      }
+      resolve(ok);
+    };
+    try {
+      const socket = new WSImpl("ws://supervisor/core/websocket");
+      const send = (obj) => socket.send(JSON.stringify(obj));
+      const timer = setTimeout(() => {
+        try { socket.close(); } catch (e) {}
+        done(false, "timeout connecting to Home Assistant websocket");
+      }, 10000);
+      socket.addEventListener("message", (event) => {
+        const msg = JSON.parse(typeof event.data === "string" ? event.data : event.data.toString());
+        if (msg.type === "auth_required") {
+          send({ type: "auth", access_token: process.env.SUPERVISOR_TOKEN });
+        } else if (msg.type === "auth_ok") {
+          send({
+            id: 1,
+            type: "homeassistant/expose_entity",
+            assistants: ["conversation"],
+            entity_ids: entityIds,
+            should_expose: true
+          });
+        } else if (msg.type === "auth_invalid") {
+          clearTimeout(timer);
+          socket.close();
+          done(false, "websocket auth failed");
+        } else if (msg.type === "result" && msg.id === 1) {
+          clearTimeout(timer);
+          socket.close();
+          if (msg.success) {
+            done(true);
+          } else {
+            done(false, JSON.stringify(msg.error));
+          }
+        }
+      });
+      socket.addEventListener("error", () => {
+        clearTimeout(timer);
+        done(false, "websocket error");
+      });
+    } catch (error) {
+      done(false, error);
+    }
+  });
+}
+
 async function postEvents(sensorName) {
   let fileContent = await fs.promises.readFile('/data/allFutureEvents.json', 'utf-8');
   let events = JSON.parse(fileContent);
   let numberOfEvents = events[`${sensorName}`].length;
   try {
-    const response = await axios.post(
+    await axios.post(
         "http://supervisor/core/api/states/sensor." + sensorName,
         { state: numberOfEvents, attributes: { data: events[`${sensorName}`] } },
         postReqOptions
@@ -444,6 +512,12 @@ async function postEventsAllCalendars() {
       console.log("postEventsAllCalendars error: " + error);
     }
   }
+  if (options.exposeToAssist && !assistExposed) {
+    const exposed = await exposeSensorsToAssist(options.calendarList.map((calendar) => calendar.calName));
+    if (exposed) {
+      assistExposed = true;
+    }
+  }
 }
 
 
@@ -455,19 +529,16 @@ var testOptions = storedOptions == currentOptions;
 
 async function initalFetch() {
   if (testOptions === true) {
-    fs.access("/data/allFutureEvents.json", fs.constants.F_OK, (err) => {
-      if (err) {
-        console.log("No previously stored events found");
-        return;
+    try {
+      await fs.promises.access("/data/allFutureEvents.json", fs.constants.F_OK);
+      let events = JSON.parse(fs.readFileSync("/data/allFutureEvents.json", "utf-8"));
+      if (events !== undefined) {
+        console.log("Previously stored events found");
+        await postEventsAllCalendars();
       }
-      if (!err) {
-        let events = JSON.parse(fs.readFileSync("/data/allFutureEvents.json", "utf-8"));
-        if (events !== undefined) {
-          console.log("Previously stored events found");
-          postEventsAllCalendars();
-       }
-      }
-    })
+    } catch (err) {
+      console.log("No previously stored events found");
+    }
   }
   if (testOptions === false) {
     console.log("Addon config has changed.");
@@ -476,7 +547,7 @@ async function initalFetch() {
       if (allEvents == true) {
         let fileWritten = await writeEventsFile(allFutureEvents);
         console.log("Events written to file: " + fileWritten + ". At: " + new Date());
-        postEventsAllCalendars();
+        await postEventsAllCalendars();
       }
     }
     catch (error) {
@@ -496,7 +567,7 @@ cron.schedule(fetchCRON, async () => {
     console.log("Calendar(s) queried at: " + new Date());
     let fileWritten = await writeEventsFile(allFutureEvents);
     console.log("Events written to file: " + fileWritten + ". At: " + new Date());
-    postEventsAllCalendars();
+    await postEventsAllCalendars();
   }
   catch (error) {
       console.log("Error posting events to sensor(s) at: " + new Date());

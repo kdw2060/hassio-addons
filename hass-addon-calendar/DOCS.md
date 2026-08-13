@@ -13,6 +13,7 @@ Configuration consists of the following parameters:
 fetchDays: 365
 fetchDaysPast: -7
 fetchCRON: '*/30 * * * *'
+exposeToAssist: false
 locale: nl-BE
 timeZone: Europe/Brussels
 calendarList:
@@ -33,6 +34,7 @@ calendarList:
 | fetchDays | integer | **always**| number of days from today to fetch events for in the calendar(s) | 
 | fetchDaysPast | integer (negative) | optional| number of days counting back from today to also fetch events for in the calendar(s), Defaults to zero, **enter a negative number** if you're gonna use this option| 
 | fetchCRON | string | **always** | CRON-pattern that determines when/how often the calendar data should be fetched. [Help for generating a pattern](https://crontab.guru/)|     
+| exposeToAssist | boolean | optional | When `true`, the add-on automatically exposes each calendar sensor to Assist. Defaults to `false`. The sensors still have no unique ID, so they cannot be managed from the entity UI; this option is the way to make them available to Assist. |
 | locale   | string | **always**  | a locale to get date/time presentation and translation right. Locales must be supported by [Luxon](https://moment.github.io/luxon/#/intl?id=how-locales-work) |
 | timeZone | string | optional   | will default to system timeZone. If you want to override, then enter a timezone like [Luxon expects it](https://moment.github.io/luxon/#/zones?id=specifying-a-zone). I suggest you enter a IANA timezone string. |
 | calName  | string | **always**    | any name you prefer, this will also become the sensor-name and so must respect HA entity-id naming restrictions (no spaces for instance)|
@@ -81,3 +83,9 @@ If you run the add-on for the very first time it will try to fetch the data for 
 Depending on the CRON-schedule you configured the data will be refreshed. I advise not to overload the google or caldav api's. I choose to only query them every 30 or 60 minutes. You can see in the addon logs when a query has run and when the data is posted to the sensor(s).
 
 The queried data is saved to a file in persistent storage and this is used upon restarts of the add-on, so after a system restart you should immediately see the calendar sensor.
+
+# Assist
+
+Home Assistant does not let add-ons register a `unique_id` for sensors created through the REST API, so those sensors cannot be exposed from the entity UI.
+
+Set `exposeToAssist: true` to have the add-on expose each calendar sensor to Assist automatically. Assist will mainly see the sensor state (the number of events); whether event details from the `data` attribute are used depends on the conversation agent.
